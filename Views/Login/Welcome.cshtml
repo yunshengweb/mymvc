@@ -1,0 +1,33 @@
+@model mymvc.Models.User
+
+@{
+    ViewData["Title"] = "Welcome";
+}
+
+<div>
+   <h2>Logged In User Details:</h2>
+    <h3>UserId: @Model.UserId</h3>
+    <h3>Email: @Model.Email</h3>
+    <h3>Password: @Model.Password</h3>
+    <h3>Confirm:  @Model.Confirm</h3>
+</div>
+
+
+
+
+@Html.ActionLink("Log Out", // <-- Link text  
+                 "Logout", // <-- Action Method Name  
+                 "Login", // <-- Controller Name  
+                 null, // <-- Route value  
+                 null // <-- htmlArguments  
+                 )  
+
+
+@section Demo
+{
+    <ul>
+        <li>User log in successfully, user details presented in this Welcome page</li>
+    </ul>
+}             
+
+

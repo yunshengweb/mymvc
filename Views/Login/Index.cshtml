@@ -1,0 +1,93 @@
+@model mymvc.Models.User
+@{  
+    ViewData["Title"]="Login";  
+}  
+ <style>
+/* Bordered form */
+form {
+  border: 3px solid #f1f1f1;
+}
+
+/* Full-width inputs */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* Add a hover effect for buttons */
+input[type=submit]:hover {
+  opacity: 0.8;
+}
+
+ </style> 
+
+<h2>Login</h2>  
+<hr>  
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        @Html.HiddenFor(md => md.UserId)
+
+        <div class="form-group">
+            @Html.LabelFor(md => md.Email)
+            <div class="col-md-10">
+                @if(TempData["Email"]==null)
+                {
+                    @Html.TextBoxFor(md => md.Email)
+                }
+                else
+                {
+                    @Html.TextBox("Email",TempData["Email"])
+                }
+                @Html.ValidationMessageFor(md => md.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(md => md.Password)
+            <div class="col-md-10">
+                @Html.PasswordFor(md => md.Password)
+                @Html.ValidationMessageFor(md => md.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+                
+        <div class="form-group">
+            <div>
+                <input type="submit" value="Submit" />
+            </div>
+        </div>
+    </div>
+}
+<br/><br/>
+
+@section Demo
+{
+    <ul>
+        <li>Invalid Email format or Password Requirement: remain on this page view (server side validation)</li>
+        <li>Valid Email format but not registered yet: redirect to register page (e.g. newuser@yahoo.com)</li>
+        <li>Email registered but not confirmed yet: rediect to confirmation (e.g. needconfirm@yahoo.com)</li>
+        <li>Email confirmed but the password is wrong: remain on this page and wait for password</li>
+        <li>Everything is fine: login to welcome page (e.g. Email:yzheng2002@yahoo.com; password: Password)</li>
+    </ul>
+}
+
+

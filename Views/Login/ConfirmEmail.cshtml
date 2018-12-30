@@ -1,0 +1,16 @@
+@{
+    ViewData["Title"] = "Confirm Email";
+}
+
+<div>
+    <h1>Confirm Email.</h1>
+    <h3>Thank you for confirming your email. @Html.ActionLink("Please Click here to Log in", "Welcome")</h3>
+</div>
+
+
+<h3 style="color:green">User Details</h3>
+<h4 style="color:green">
+    <b>Email: @ViewBag.Email<br />
+    <b>Password: @ViewBag.Password<br />
+    <b>UserId: @ViewBag.UserId</b>
+</h4>

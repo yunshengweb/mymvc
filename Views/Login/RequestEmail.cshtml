@@ -1,0 +1,30 @@
+@{
+    ViewData["Title"] = "Request Email comfirmation";
+}
+
+<div>
+    <h1>Confirmation Email Sent.</h1>
+    <h3>Please check your email and confirm your email address.</h3>
+    <form method="post">
+        <input type="hidden" name="UserId" value=@TempData["UserId"]> </input>
+        <label>Valification Code:</label>
+        <input type="text" name="Code" value=""/>
+        <input type="submit" value="Confirm"/>
+    </form>
+</div>
+
+
+
+Code:@ViewBag.Code
+@section Demo 
+{
+    <ul>
+        <li>The code will be sent to email</li>
+        <li>Wrong code input: remain on this page for right input</li>
+        <li>Valification code sent: login to welcome page</li>
+    </ul>
+}
+
+
+
+

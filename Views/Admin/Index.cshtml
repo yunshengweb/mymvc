@@ -1,0 +1,54 @@
+  @model IEnumerable<User>
+    
+    @{
+        ViewBag.Title = "Index";
+    }
+    
+    <h2>User List</h2>
+    
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th>@Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>@Html.DisplayNameFor(model => model.Password)
+            </th>
+            <th>@Html.DisplayNameFor(model => model.Confirm)
+            </th>
+            <th></th>
+        </tr>
+        @if(Model!=null)
+        {
+        @foreach (var item in Model) {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.UserId)
+            </td>
+            <td>@Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>@Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>@Html.DisplayFor(modelItem => item.Confirm)
+            </td>
+            <td>@Html.ActionLink("Edit", "Edit", new { id=item.UserId }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.UserId })
+            </td>
+        </tr>
+        }
+        }
+    </table> 
+
+@section Demo
+{
+    <ul>
+        <li>Standard Database CRUD operations</li>
+        <li>Create New goes to Create Page to add new user</li>
+        <li>Edit goes to the Edit page to modify the specific user infomation</li>
+        <li>Delete just delete the specific user information</li>
+    </ul>
+}
+
+

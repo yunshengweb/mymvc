@@ -1,0 +1,107 @@
+@model mymvc.Models.User
+@{  
+    ViewData["Title"]="Register";  
+}  
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* Set a style for all buttons */
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+input[type=submit]:hover {
+  opacity:1;
+}
+
+
+</style>
+<h2>Register</h2>  
+<hr>  
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        @Html.HiddenFor(md => md.UserId)
+
+        <div class="form-group">
+            @Html.LabelFor(md => md.Email)
+            <div class="col-md-10">
+                @if(TempData["Email"]==null)
+                {
+                    @Html.TextBoxFor(md=>md.Email)
+                }
+                else
+                {
+                    @Html.TextBox("Email",TempData["Email"])
+                }
+                @Html.ValidationMessageFor(md => md.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(md => md.Password)
+            <div class="col-md-10">
+                @Html.PasswordFor(md => md.Password)
+                @Html.ValidationMessageFor(md => md.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(md => md.ConfirmPassword)
+            <div class="col-md-10">
+                @Html.PasswordFor(md => md.ConfirmPassword)
+                @Html.ValidationMessageFor(md => md.ConfirmPassword, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div>
+                <input type="submit" value="Submit"  />
+            </div>
+        </div>
+    </div>
+}
+
+@section Demo
+{
+    <ul>
+        <li>If it is referred from the Login Page, the email address is set as default</li>
+        <li>If by any chance that the email is registered and confirm: redirect to Login (e.g. confirmeduser@yahoo.com)</li>
+        <li>Email registered but not confirmed yet: rediect to confirmation (e.g. needconfirm@yahoo.com)</li>
+        <li>Until valid password is typed in and confirmed: remain on this page (server side validation)</li>
+        <li>Everything is fine: continue to confirmEmail page (e.g. password:abcdef;confirmpassword:abcdef)</li>
+    </ul>
+}
+
